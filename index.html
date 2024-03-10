@@ -13,7 +13,9 @@
 <body>
   <div id="app">{{ message }}</div>
   <script>
-    const { init } = window.tmajs.sdk;
+    const { init, retrieveLaunchParams } = window.tmajs.sdk;
+	const { createApp, ref } = Vue
+	const { initDataRaw, initData } = retrieveLaunchParams();
 
     function onInit({ mainButton, backButton }) {
       let counter = 0;
@@ -47,13 +49,14 @@
       .then(onInit)
       .catch(onError);
 	  
-	const { createApp, ref } = Vue
+
 
 	createApp({
 		setup() {
 		  const message = ref('Hello vue!')
+		  
 		  return {
-			message
+			initDataRaw
 		  }
 		}
 	}).mount('#app')
