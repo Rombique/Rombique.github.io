@@ -11,7 +11,7 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-  <div id="app">{{ text }}</div>
+  <div id="app"><h2>{{ text }}<h2></div>
   <script>
     const { init, retrieveLaunchData } = window.tmajs.sdk;
 	const { createApp, ref } = Vue
@@ -54,7 +54,8 @@
 	createApp({
 		setup() {
 		  const { launchParams } = window.tmajs.sdk.retrieveLaunchData();
-		  const text = launchParams.initDataRaw
+		  const user = launchParams.initData.user;
+		  let text = user.firstName + " " + user.lastName + " prem: " + user.isPremium + " " + user.id;
 		  return {
 			text
 		  }
