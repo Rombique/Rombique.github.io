@@ -11,11 +11,11 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-  <div id="app">{{ initDataRaw }}</div>
+  <div id="app">{{ text }}</div>
   <script>
-    const { init, retrieveLaunchParams } = window.tmajs.sdk;
+    const { init, retrieveLaunchData } = window.tmajs.sdk;
 	const { createApp, ref } = Vue
-	const { initDataRaw, initData } = retrieveLaunchParams();
+	
 
     function onInit({ mainButton, backButton }) {
       let counter = 0;
@@ -53,10 +53,10 @@
 
 	createApp({
 		setup() {
-		  const message = ref('Hello vue!')
-		  
+		  const { launchParams } = window.tmajs.sdk.retrieveLaunchData();
+		  const text = launchParams.initDataRaw
 		  return {
-			this.initDataRaw
+			text
 		  }
 		}
 	}).mount('#app')
