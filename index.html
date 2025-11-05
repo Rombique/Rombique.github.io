@@ -6,7 +6,7 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
   >
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Telegram Mini Apps example</title>
+  <title>GTM test</title>
   <!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -14,56 +14,12 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-KHGT7ZP4');</script>
 	<!-- End Google Tag Manager -->
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 	<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHGT7ZP4"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <body>
-  <div id="app"><h2>{{ text }}<h2></div>
-  <script>
-		const { createApp, ref } = Vue
-	
-
-    function onInit({ mainButton, backButton }) {
-      let counter = 0;
-
-      const setCounter = (value) => {
-        counter = value;
-
-        if (counter === 0) {
-          backButton.hide();
-        } else {
-          backButton.show();
-        }
-
-        mainButton.setText(`Counter: ${counter}`);
-      }
-
-      backButton.on('click', () => setCounter(counter - 1));
-      mainButton.on('click', () => setCounter(counter + 1));
-      mainButton.setText('Click me').enable().show();
-    }
-
-    function onError(e) {
-      const div = document.createElement('div');
-      div.innerText = e instanceof Error ? e.message : JSON.stringify(e);
-
-      document.body.appendChild(div);
-    }
-	  
-
-
-	createApp({
-		setup() {
-		  
-		  let text = 'Hello world!';
-		  return {
-			text
-		  }
-		}
-	}).mount('#app')
-  </script>
+ <h1>Hello world!</h1>
 </body>
 </html>
