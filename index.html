@@ -7,14 +7,23 @@
   >
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Telegram Mini Apps example</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tma.js/sdk@1.2.0"></script>
+  <!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-KHGT7ZP4');</script>
+	<!-- End Google Tag Manager -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHGT7ZP4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <body>
   <div id="app"><h2>{{ text }}<h2></div>
   <script>
-    const { init, retrieveLaunchData } = window.tmajs.sdk;
-	const { createApp, ref } = Vue
+		const { createApp, ref } = Vue
 	
 
     function onInit({ mainButton, backButton }) {
@@ -43,19 +52,13 @@
 
       document.body.appendChild(div);
     }
-
-    // Initialize SDK with debug mode on.
-    init({ debug: true, async: true, acceptCustomStyles: true, cssVars: true })
-      .then(onInit)
-      .catch(onError);
 	  
 
 
 	createApp({
 		setup() {
-		  const { launchParams } = window.tmajs.sdk.retrieveLaunchData();
-		  const user = launchParams.initData.user;
-		  let text = user.firstName + " " + user.lastName + " prem: " + user.isPremium + " " + user.id;
+		  
+		  let text = 'Hello world!';
 		  return {
 			text
 		  }
