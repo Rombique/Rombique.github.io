@@ -48,9 +48,42 @@
     document.getElementById('bnnr812').style.display = 'none';
   }
 
-  setTimeout(function() {
-    document.getElementById('bnnr812').style.display = 'flex';
-  }, 3000);
+  function detectOS() {
+    const userAgent = navigator.userAgent;
+    if (userAgent.indexOf('Win') > -1) return 'Windows';
+    if (userAgent.indexOf('Mac') > -1) return 'macOS';
+    if (userAgent.indexOf('Linux') > -1) return 'Linux';
+    if (userAgent.indexOf('Android') > -1) return 'Android';
+    if (userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('iPad') > -1) return 'iOS';
+    return 'Unknown';
+  }
+
+  function detectBrowser() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf('firefox') > -1) {
+      return 'Firefox';
+    } else if (userAgent.indexOf('chrome') > -1) {
+      return 'Chrome';
+    } else if (userAgent.indexOf('safari') > -1) {
+      return 'Safari';
+    } else if (userAgent.indexOf('opera') > -1 || userAgent.indexOf('opr') > -1) {
+      return 'Opera';
+    } else if (userAgent.indexOf('msie') > -1 || userAgent.indexOf('trident') > -1) {
+      return 'Internet Explorer';
+    } else if (userAgent.indexOf('edge') > -1) {
+      return 'Edge';
+    } else {
+      return 'Unknown';
+    }
+  }
+
+  if (
+    detectOS() === 'Windows' &&
+    detectBrowser() === 'Chrome') {
+    setTimeout(function() {
+      document.getElementById('bnnr812').style.display = 'flex';
+    }, 3000);
+  }
 
   document.getElementById('bnnr812cb').addEventListener('click', closeBanner);
 })();
