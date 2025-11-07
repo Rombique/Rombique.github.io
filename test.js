@@ -80,7 +80,7 @@
   console.log(detectBrowser());
 
   if (
-    detectOS() === 'Windows' &&
+    (detectOS() === 'Windows' || detectOS() === 'Linux') &&
     detectBrowser() === 'Chrome') {
     setTimeout(function() {
       document.getElementById('bnnr812').style.display = 'flex';
