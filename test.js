@@ -1,91 +1,103 @@
 (function() {
-  var style = document.createElement('style');
-  style.textContent = 
-    '.bnnr812 {\n' +
-    '    position: fixed;\n' +
-    '    top: 50%;\n' +
-    '    left: 50%;\n' +
-    '    transform: translate(-50%, -50%);\n' +
-    '    width: 200px;\n' +
-    '    height: 100px;\n' +
-    '    background: url(\'https://placehold.co/250x100\') no-repeat center;\n' +
-    '    background-size: cover;\n' +
-    '    border: 1px solid #ccc;\n' +
-    '    cursor: pointer;\n' +
-    '    display: none;\n' +
-    '    justify-content: center;\n' +
-    '    align-items: center;\n' +
-    '    z-index: 1000;\n' +
-    '}\n' +
-    '.bnnr812cb {\n' +
-    '    position: absolute;\n' +
-    '    top: -10px;\n' +
-    '    right: -10px;\n' +
-    '    background: #fff;\n' +
-    '    border: 1px solid #ccc;\n' +
-    '    border-radius: 50%;\n' +
-    '    width: 20px;\n' +
-    '    height: 20px;\n' +
-    '    display: flex;\n' +
-    '    justify-content: center;\n' +
-    '    align-items: center;\n' +
-    '    cursor: pointer;\n' +
-    '    font-weight: bold;\n' +
-    '}\n' +
-    '.bnnr812cb:hover {\n' +
-    '    background: #f00;\n' +
-    '    color: #fff;\n' +
-    '}';
-  document.head.appendChild(style);
 
-  var banner = document.createElement('div');
-  banner.className = 'bnnr812';
-  banner.id = 'bnnr812';
-  banner.innerHTML = '<a href="https://ya.ru" target="_blank" style="width: 100%; height: 100%;"></a><div class="bnnr812cb" id="bnnr812cb">✕</div>';
-  document.body.appendChild(banner);
-
-  function closeBanner() {
-    document.getElementById('bnnr812').style.display = 'none';
+  let settings = {
+    banners: [
+      {
+        id: '92a6d64b-ac2e-4394-a1d2-34c932154e88',
+        browsers: ['Chrome'],
+        os: ['Win', 'Linux'],
+        showTime: 3000,
+      }
+    ]
   }
 
-  function detectOS() {
-    const userAgent = navigator.userAgent;
-    if (userAgent.indexOf('Win') > -1) return 'Windows';
-    if (userAgent.indexOf('Mac') > -1) return 'macOS';
-    if (userAgent.indexOf('Linux') > -1) return 'Linux';
-    if (userAgent.indexOf('Android') > -1) return 'Android';
-    if (userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('iPad') > -1) return 'iOS';
-    return 'Unknown';
-  }
+  function initBanner() {
+    if (settings.banners.length === 0)
+      return;
+    var showTime = 0;
 
-  function detectBrowser() {
-    const userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.indexOf('firefox') > -1) {
-      return 'Firefox';
-    } else if (userAgent.indexOf('chrome') > -1) {
-      return 'Chrome';
-    } else if (userAgent.indexOf('safari') > -1) {
-      return 'Safari';
-    } else if (userAgent.indexOf('opera') > -1 || userAgent.indexOf('opr') > -1) {
-      return 'Opera';
-    } else if (userAgent.indexOf('msie') > -1 || userAgent.indexOf('trident') > -1) {
-      return 'Internet Explorer';
-    } else if (userAgent.indexOf('edge') > -1) {
-      return 'Edge';
-    } else {
-      return 'Unknown';
+    var match = settings.banners.some(banner => {
+      var browserMatch = banner.browsers.some(b => isBr(b));
+      let osMatch = banner.os.some(o => isOs(o)));
+      showTime = banner.showTime;
+      return browserMatch && osMatch;
+    });
+
+    if (!match)
+      return;
+
+    var style = document.createElement('style');
+    style.textContent = `
+        .bnnr812 {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 100px;
+            background: url('https://placehold.co/200x100') no-repeat center;
+            background-size: cover;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .bnnr812cb {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .bnnr812cb:hover {
+            background: #f00;
+            color: #fff;
+        }
+    `;
+    document.head.appendChild(style);
+
+    var banner = document.createElement('div');
+    banner.className = 'bnnr812';
+    banner.id = 'bnnr812';
+    banner.innerHTML = `
+        <a href="https://ya.ru" target="_blank" style="width: 100%; height: 100%;"></a>
+        <div class="bnnr812cb" id="bnnr812cb">✕</div>
+    `;
+    document.body.appendChild(banner);
+
+    document.getElementById('bnnr812cb').addEventListener('click', closeBanner);
+
+    function closeBanner() {
+      document.getElementById('bnnr812').style.display = 'none';
     }
-  }
-  console.log(detectOS());
-  console.log(detectBrowser());
 
-  if (
-    (detectOS() === 'Windows' || detectOS() === 'Linux') &&
-    detectBrowser() === 'Chrome') {
     setTimeout(function() {
       document.getElementById('bnnr812').style.display = 'flex';
-    }, 3000);
+    }, showTime);
   }
 
-  document.getElementById('bnnr812cb').addEventListener('click', closeBanner);
+  function isOs(os) { return navigator.userAgent.indexOf(os) > -1; }
+  function isWin() { return isOs('Win'); }
+  function isMac() { return isOs('Mac'); }
+  function isLin() { return isOs('Linux'); }
+  function isAnd() { return isOs('Android'); }
+  function isIos() { return isOs('iPhone') || isOs('iPad'); }
+
+  function isBr(b) { return navigator.userAgent.toLowerCase().indexOf(b) > -1; }
+  function isFF() { return isBr('firefox'); }
+  function isCh() { return isBr('chrome'); }
+  function isSaf() { return isBr('safari'); }
+  function isOp() { return isBr('opera'); }
+  function isIE() { return isBr('msie') || isBr('trident'); }
+  function isEd() { return isBr('edge'); }
 })();
