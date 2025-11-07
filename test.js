@@ -88,6 +88,6 @@
 
   initBanner();
 
-  function isOs(os) { return navigator.userAgent.indexOf(os) > -1; }
-  function isBr(b) { return navigator.platform.toLowerCase().indexOf(b.toLowerCase()) > -1; }
+  function isBr(b) { return navigator.userAgent.indexOf(b) > -1; }
+  function isOs(os) { return navigator.platform.toLowerCase().indexOf(os.toLowerCase()) > -1; }
 })();
