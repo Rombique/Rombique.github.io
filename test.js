@@ -18,7 +18,7 @@
 
     var match = settings.banners.some(banner => {
       var browserMatch = banner.browsers.some(b => isBr(b));
-      let osMatch = banner.os.some(o => isOs(o)));
+      let osMatch = banner.os.some(o => isOs(o));
       showTime = banner.showTime;
       return browserMatch && osMatch;
     });
