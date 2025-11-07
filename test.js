@@ -76,6 +76,8 @@
       return 'Unknown';
     }
   }
+  console.log(detectOS());
+  console.log(detectBrowser());
 
   if (
     detectOS() === 'Windows' &&
