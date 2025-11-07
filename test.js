@@ -87,17 +87,5 @@
   }
 
   function isOs(os) { return navigator.userAgent.indexOf(os) > -1; }
-  function isWin() { return isOs('Win'); }
-  function isMac() { return isOs('Mac'); }
-  function isLin() { return isOs('Linux'); }
-  function isAnd() { return isOs('Android'); }
-  function isIos() { return isOs('iPhone') || isOs('iPad'); }
-
   function isBr(b) { return navigator.userAgent.toLowerCase().indexOf(b) > -1; }
-  function isFF() { return isBr('firefox'); }
-  function isCh() { return isBr('chrome'); }
-  function isSaf() { return isBr('safari'); }
-  function isOp() { return isBr('opera'); }
-  function isIE() { return isBr('msie') || isBr('trident'); }
-  function isEd() { return isBr('edge'); }
 })();
