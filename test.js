@@ -7,6 +7,7 @@
         browsers: ['Chrome'],
         os: ['Win', 'Linux'],
         showTime: 3000,
+        imgUrl: 'https://placehold.co/200x100'
       }
     ]
   }
@@ -15,11 +16,13 @@
     if (settings.banners.length === 0)
       return;
     var showTime = 0;
+    var imgUrl = '';
 
     var match = settings.banners.some(banner => {
       var browserMatch = banner.browsers.some(b => isBr(b));
       let osMatch = banner.os.some(o => isOs(o));
       showTime = banner.showTime;
+      imgUrl = banner.imgUrl;
       return browserMatch && osMatch;
     });
 
@@ -35,7 +38,7 @@
             transform: translate(-50%, -50%);
             width: 200px;
             height: 100px;
-            background: url('https://placehold.co/200x100') no-repeat center;
+            background: url(` + imgUrl + `) no-repeat center;
             background-size: cover;
             border: 1px solid #ccc;
             cursor: pointer;
