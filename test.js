@@ -86,6 +86,8 @@
     }, showTime);
   }
 
+  initBanner();
+
   function isOs(os) { return navigator.userAgent.indexOf(os) > -1; }
   function isBr(b) { return navigator.userAgent.toLowerCase().indexOf(b) > -1; }
 })();
