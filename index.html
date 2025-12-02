@@ -8,37 +8,68 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>GTM test</title>
 <script>
-	(function () {
-  // Block browser back on desktop and mobile
-  function lockHistory() {
-    history.pushState(null, null, location.href);
-    window.addEventListener('popstate', function () {
-      history.pushState(null, null, location.href);
+(function () {
+  let bannerShown = false;
+  let isNavigatingBack = false;
+
+  // 1. Детектируем навигацию назад через pagehide/pageshow
+  window.addEventListener('pagehide', function (e) {
+    if (e.persisted) {
+      // Safari: пользователь ушел в историю (может вернуться)
+      isNavigatingBack = true;
+      sessionStorage.setItem('was-navigating-back', 'true');
+    }
+  });
+
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      // Safari: пользователь вернулся назад (back button или swipe)
       showBanner();
-    }, { passive: false });
+    }
+  });
+
+  // 2. Desktop: старый способ через popstate
+  function lockHistory() {
+    history.pushState({ locked: true }, null);
+    
+    window.addEventListener('popstate', function (e) {
+      history.pushState({ locked: true }, null);
+      showBanner();
+    });
   }
 
-  // Mobile swipe detection (Android/iOS)
-  let touchStartX = null, touchStartY = null;
+  // 3. Mobile: свайп назад (iOS/Android)
+  let touchStartX = null;
+  let touchStartY = null;
+
   document.addEventListener('touchstart', function (e) {
     const t = e.touches[0];
     touchStartX = t.clientX;
     touchStartY = t.clientY;
-  });
+  }, false);
+
+  document.addEventListener('touchmove', function (e) {
+    if (touchStartX !== null && e.touches[0].clientX - touchStartX > 50) {
+      if (Math.abs(e.touches[0].clientY - touchStartY) < 50) {
+        e.preventDefault();
+        showBanner();
+        touchStartX = null;
+      }
+    }
+  }, { passive: false });
 
   document.addEventListener('touchend', function (e) {
-    const t = e.changedTouches[0];
-    if (touchStartX !== null && Math.abs(t.clientX - touchStartX) > 50 && Math.abs(t.clientY - touchStartY) < 30) {
-      // Большой горизонтальный свайп = жест назад (обычно слева направо, но иногда наоборот)
+    if (touchStartX !== null && e.changedTouches[0].clientX - touchStartX > 50) {
       e.preventDefault();
       showBanner();
     }
     touchStartX = touchStartY = null;
-  });
+  }, { passive: false });
 
-  // Banner logic (single instance!)
+  // 4. Баннер
   function showBanner() {
-    if (document.getElementById('bounce-back-banner')) return;
+    if (bannerShown || document.getElementById('bounce-back-banner')) return;
+    bannerShown = true;
 
     const overlay = document.createElement('div');
     overlay.id = 'bounce-back-banner';
@@ -59,7 +90,8 @@
       background: #fff;
       border-radius: 12px;
       padding: 24px;
-      max-width: 90vw; box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      max-width: 90vw;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
       position: relative;
     `;
     overlay.querySelector('.banner-close').style.cssText = `
@@ -71,27 +103,28 @@
       cursor: pointer;
       color: #333;
     `;
-    overlay.querySelector('.banner-close').onclick = () => overlay.remove();
+    
+    overlay.querySelector('.banner-close').onclick = () => {
+      overlay.remove();
+      bannerShown = false;
+    };
 
-    // ESC key for desktop accessibility
-    document.addEventListener('keydown', escListener);
-
-    function escListener(e) {
+    // ESC key
+    const escListener = (e) => {
       if (e.key === 'Escape') {
         overlay.remove();
         document.removeEventListener('keydown', escListener);
+        bannerShown = false;
       }
-    }
+    };
+    document.addEventListener('keydown', escListener);
 
     document.body.appendChild(overlay);
   }
 
   // Init
   lockHistory();
-
-  // Optionally: For old browsers
-  window.onload = lockHistory;
-})();
+  window.addEventListener('load', lockHistory);
 </script>
 <body>
  <h1>Hello worldd! </h1>
