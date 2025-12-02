@@ -7,18 +7,92 @@
   >
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>GTM test</title>
-  <!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-KHGT7ZP4');</script>
-	<!-- End Google Tag Manager -->
-</head>
-	<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHGT7ZP4"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<script>
+	(function () {
+  // Block browser back on desktop and mobile
+  function lockHistory() {
+    history.pushState(null, null, location.href);
+    window.addEventListener('popstate', function () {
+      history.pushState(null, null, location.href);
+      showBanner();
+    }, { passive: false });
+  }
+
+  // Mobile swipe detection (Android/iOS)
+  let touchStartX = null, touchStartY = null;
+  document.addEventListener('touchstart', function (e) {
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+  });
+
+  document.addEventListener('touchend', function (e) {
+    const t = e.changedTouches[0];
+    if (touchStartX !== null && Math.abs(t.clientX - touchStartX) > 50 && Math.abs(t.clientY - touchStartY) < 30) {
+      // Большой горизонтальный свайп = жест назад (обычно слева направо, но иногда наоборот)
+      e.preventDefault();
+      showBanner();
+    }
+    touchStartX = touchStartY = null;
+  });
+
+  // Banner logic (single instance!)
+  function showBanner() {
+    if (document.getElementById('bounce-back-banner')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'bounce-back-banner';
+    overlay.innerHTML = `
+      <div class="banner-modal">
+        <button class="banner-close" aria-label="Закрыть">×</button>
+        <img src="https://placehold.co/300x150" alt="Ваш баннер" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      </div>
+    `;
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+    `;
+    overlay.querySelector('.banner-modal').style.cssText = `
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 90vw; box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      position: relative;
+    `;
+    overlay.querySelector('.banner-close').style.cssText = `
+      position: absolute;
+      top: 8px; right: 8px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    `;
+    overlay.querySelector('.banner-close').onclick = () => overlay.remove();
+
+    // ESC key for desktop accessibility
+    document.addEventListener('keydown', escListener);
+
+    function escListener(e) {
+      if (e.key === 'Escape') {
+        overlay.remove();
+        document.removeEventListener('keydown', escListener);
+      }
+    }
+
+    document.body.appendChild(overlay);
+  }
+
+  // Init
+  lockHistory();
+
+  // Optionally: For old browsers
+  window.onload = lockHistory;
+})();
+</script>
 <body>
  <h1>Hello worldd! </h1>
 	<a href="https://jaktenstid.github.io/personal.github.io/">Щелкни сюда</a>
