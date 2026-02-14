@@ -1,9 +1,476 @@
-<html>
+
+<!doctype html>
+<html lang="en">
 <head>
-<title>Page 2</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Simple HTML Page</title>
+    <meta name="description" content="A clean, single-file example HTML page."/>
+    <style>
+        :root {
+            --bg: #f7f8fb;
+            --card: #ffffff;
+            --accent: #0066ff;
+            --muted: #6b7280;
+            --radius: 12px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: #0f172a;
+            line-height: 1.45
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 48px auto;
+            padding: 24px
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), #00b4ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700
+        }
+
+        nav a {
+            margin-left: 14px;
+            text-decoration: none;
+            color: var(--muted)
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns:1fr 320px;
+            gap: 28px;
+            align-items: center;
+            margin-top: 28px
+        }
+
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06)
+        }
+
+        .title {
+            font-size: 28px;
+            margin: 0 0 8px
+        }
+
+        .subtitle {
+            color: var(--muted);
+            margin: 0 0 18px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 22px
+        }
+
+        .feature {
+            padding: 16px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent)
+        }
+
+        .feature h4 {
+            margin: 0 0 8px
+        }
+
+        footer {
+            margin-top: 28px;
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center
+        }
+
+        @media (max-width: 820px) {
+            .hero {
+                grid-template-columns:1fr;
+            }
+
+            nav a {
+                margin-left: 8px
+            }
+        }
+    </style>
+    <!-- BannerFlow Script for Seed Site B -->
+<script>
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://235123.xyz/api/v1/scripts/banners.js';
+  s.setAttribute('data-website-id', '3056172f-79b7-4e58-b37a-2c50f7bdfd48');
+  s.setAttribute('data-host-url', 'https://235123.xyz');
+  document.head.appendChild(s);
+</script>
 </head>
 <body>
-<h1> Page 2</h1>
-<a href="https://rombique.github.io/">Main page</a>
+<div class="container">
+    <header>
+        <div class="brand">
+            <div class="logo">S</div>
+            <div>
+                <a href="https://pc.pclira.com/?mid=241296_1950065" target="_blank">CLICK ME!!!</a>
+            </div>
+        </div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div id="offerModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.8); color:white; text-align:center; padding-top:100px;">
+        <h1>Special Offer!</h1>
+        <p>Get our exclusive deal before you leave.</p>
+        <button onclick="closeOffer()">Close</button>
+    </div>
+
+    <main>
+    <section class="hero">
+        <div class="card">
+            <h1 class="title">A clean, responsive HTML starter</h1>
+            <p class="subtitle">This single-file template includes a header, responsive layout, subtle UI cards and
+                simple styles — ready to customise.</p>
+            <a class="btn" href="#features">Explore features</a>
+
+            <div class="features" style="margin-top:18px">
+                <div class="feature">
+                    <h4>Easy to edit</h4>
+                    <p style="margin:0;color:var(--muted)">All styles are inside the file—no build step needed.</p>
+                </div>
+                <div class="feature">
+                    <h4>Responsive</h4>
+                    <p style="margin:0;color:var(--muted)">Layout adapts from mobile to desktop using simple CSS
+                        grid.</p>
+                </div>
+                <div class="feature">
+                    <h4>Accessible</h4>
+                    <p style="margin:0;color:var(--muted)">Semantic HTML and clear contrast to help users and screen
+                        readers.</p>
+                </div>
+            </div>
+        </div>
+
+        <aside class="card">
+            <h3 style="margin-top:0">Quick tips</h3>
+            <ul style="margin:0;padding-left:18px;color:var(--muted)">
+                <li>Change the accent color in <code>:root</code>.</li>
+                <li>Replace the logo with an <code>&lt;img&gt;</code> if you have one.</li>
+                <li>Remove the inline styles and move them to a separate file for larger projects.</li>
+            </ul>
+        </aside>
+    </section>
+
+    <!-- LONG CONTENT BLOCK -->
+    <section id="features" class="card" style="margin-top:22px">
+        <h2>Platform Overview</h2>
+        <p style="color:var(--muted)">
+            This demo page intentionally contains extended content to simulate a real-world landing page.
+            Scroll depth testing, user behavior tracking, heatmap analysis, and engagement metrics
+            benefit from long-form layouts that require sustained navigation.
+        </p>
+
+        <div class="features">
+            <div class="feature">
+                <h4>Performance</h4>
+                <p style="color:var(--muted)">Optimized layout, lightweight styles, and minimal DOM depth.</p>
+            </div>
+            <div class="feature">
+                <h4>Security</h4>
+                <p style="color:var(--muted)">CSP-ready structure, no inline JS dependencies required.</p>
+            </div>
+            <div class="feature">
+                <h4>Scalability</h4>
+                <p style="color:var(--muted)">Easy vertical expansion for content-heavy projects.</p>
+            </div>
+            <div class="feature">
+                <h4>Analytics Ready</h4>
+                <p style="color:var(--muted)">Scroll-depth and behavior tracking compatible.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTICLE BLOCK -->
+    <section class="card" style="margin-top:18px">
+        <h2>In-Depth Explanation</h2>
+        <p style="color:var(--muted)">
+            Long-form pages are frequently used in marketing funnels, documentation platforms, and
+            storytelling layouts. By extending the vertical space of your page, you create more
+            opportunities to deliver structured information, highlight features, and guide users
+            through a controlled narrative flow.
+        </p>
+
+        <p style="color:var(--muted)">
+            This design encourages progressive engagement, enabling smooth scroll interactions,
+            animation triggers, and exit-intent capture logic. It also allows measurement of
+            meaningful engagement rather than bounce-only metrics.
+        </p>
+
+        <p style="color:var(--muted)">
+            Use long content zones strategically: introduce value, build trust, reinforce messaging,
+            and conclude with conversion elements. Each vertical segment should have a clear
+            functional role in the overall layout.
+        </p>
+
+        <p style="color:var(--muted)">
+            This block is deliberately verbose in order to create natural scrolling length without
+            artificial spacers or forced layout distortion.
+        </p>
+    </section>
+
+    <!-- REPEATED GRID BLOCK -->
+    <section class="card" style="margin-top:18px">
+        <h2>Extended Feature Grid</h2>
+        <div class="features">
+            <div class="feature"><h4>Module A</h4><p style="color:var(--muted)">Structured layout design.</p></div>
+            <div class="feature"><h4>Module B</h4><p style="color:var(--muted)">Component-based UI patterns.</p></div>
+            <div class="feature"><h4>Module C</h4><p style="color:var(--muted)">Adaptive responsiveness.</p></div>
+            <div class="feature"><h4>Module D</h4><p style="color:var(--muted)">Low-latency rendering.</p></div>
+            <div class="feature"><h4>Module E</h4><p style="color:var(--muted)">SEO-friendly semantics.</p></div>
+            <div class="feature"><h4>Module F</h4><p style="color:var(--muted)">Clean DOM structure.</p></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+
+          <section id="about" class="card" style="margin-top:18px">
+        <h3>About this template</h3>
+        <p style="color:var(--muted)">
+            Designed as a vertically scalable, production-grade landing structure that enables
+            detailed content flow, tracking integrations, and smooth user experience.
+        </p>
+    </section>
+      
+
+    <!-- CONTACT -->
+    <section id="contact" class="card"
+             style="margin-top:12px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <div>
+            <strong>Get in touch</strong>
+            <div style="color:var(--muted)">hello@example.com</div>
+        </div>
+        <div style="margin-left:auto">
+            <a class="btn" href="mailto:hello@example.com">Email us</a>
+        </div>
+    </section>
+</main>
+
+    <footer>
+        © SimpleSite — Built with a single HTML file.
+    </footer>
+</div>
+
+<script>
+</script>
+
 </body>
 </html>
